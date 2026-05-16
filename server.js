@@ -1,9 +1,10 @@
 const dns = require('dns');
 dns.setDefaultResultOrder('ipv4first');
 dns.setServers(['8.8.8.8', '8.8.4.4']);
-
+const bcrypt = require('bcryptjs');
 const express = require('express');
 const Transaction = require('./models/Transaction');
+const User = require('./models/User');
 const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
@@ -11,8 +12,56 @@ require('dotenv').config();
 const app = express();
 app.use(express.json()); 
 app.use(cors());
-console.log("Connecting to:", process.env.MONGO_URI);
-// Route
+//Route for User Schema CRUD operations
+
+app.post('/api/users/register', async(req, res) => //register
+{
+    try{
+        const existingUser = await User.findOne({ email:req.body.email });
+        if(existingUser)
+        {
+            res.status(400).json({ message: 'Email already in use' });
+            return;
+        }
+        // bcyrpt code to hash the password
+            const salt = await bcrypt.genSalt(10);
+            const hashedPassword = await bcrypt.hash(req.body.password, salt);
+        // Create and save the new user
+            const newUser = new User({
+            username: req.body.username,
+            email: req.body.email,
+            password: hashedPassword
+        });
+        const savedUser = await newUser.save();
+        res.status(201).json(savedUser);
+    }
+    catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
+
+app.post('/api/users/login', async (req, res) => //login
+{
+    try{
+        const user = await User.findOne({ email: req.body.email });
+        if(!user)
+            {
+                res.status(400).json({ message: 'Invalid email or password' });
+                return;                
+            }          
+        const isMatch = await bcrypt.compare(req.body.password, user.password);
+        if(!isMatch)
+            {
+                res.status(400).json({ message: 'Invalid email or password' });
+                return;                
+             }  
+        res.json({ message: 'Login successful', userId: user._id });
+    }
+    catch (err) {
+        res.status(400).json({ message: err.message });
+    }
+});
+// Route for Transaction Schema CRUD operations
 app.post('/api/transactions', async (req, res) => {
     try {
         const newTransaction = new Transaction({
