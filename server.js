@@ -14,10 +14,9 @@ require('dotenv').config();
 const app = express();
 app.use(express.json()); 
 app.use(cors());
-    
-// ==========================================
+app.use(express.static('public'));
+
 // Route for User Schema CRUD operations
-// ==========================================
 
 app.post('/api/users/register', async(req, res) => {
     try {
