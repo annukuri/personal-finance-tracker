@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinanceApp - Workspace Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard-page-bg">
+
+    <header class="dashboard-header">
+        <div class="header-brand">
+            <h2>FinanceApp <span>Workspace</span></h2>
+        </div>
+        <div class="header-actions">
+            <button id="logout-btn" class="btn btn-logout">Secure Sign Out</button>
+        </div>
+    </header>
+
+    <main class="dashboard-grid-container">
+        
+        <section class="grid-column-left">
+            
+            <div class="metrics-summary-row">
+                <div class="metric-card card-income">
+                    <h5>Total Income</h5>
+                    <h2 id="summary-income">$0.00</h2>
+                </div>
+                <div class="metric-card card-expense">
+                    <h5>Total Expenses</h5>
+                    <h2 id="summary-expense">$0.00</h2>
+                </div>
+                <div class="metric-card card-balance">
+                    <h5>Net Balance</h5>
+                    <h2 id="summary-balance">$0.00</h2>
+                </div>
+            </div>
+
+            <div class="dashboard-card form-card">
+                <h3>Log New Transaction</h3>
+                <form id="transaction-form">
+                    <div class="input-row-split">
+                        <div class="input-group">
+                            <label for="tx-type">Transaction Type</label>
+                            <select id="tx-type" required>
+                                <option value="Expense">Expense (Debit)</option>
+                                <option value="Income">Income (Credit)</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label for="tx-amount">Amount ($)</label>
+                            <input type="number" step="0.01" id="tx-amount" placeholder="0.00" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="tx-category">Category Tag</label>
+                        <select id="tx-category" required>
+                            <option value="Salary">Salary / Revenue</option>
+                            <option value="Food">Food / Dining</option>
+                            <option value="Rent">Rent / Utilities</option>
+                            <option value="Entertainment">Entertainment</option>
+                            <option value="Transportation">Transportation</option>
+                            <option value="Miscellaneous">Miscellaneous</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="tx-desc">Memo Description</label>
+                        <input type="text" id="tx-desc" placeholder="e.g. Weekly grocery run or client invoice payment">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="tx-tags">Metadata Tags <small>(Comma separated)</small></label>
+                        <input type="text" id="tx-tags" placeholder="e.g. essential, recurring, personal">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary-action">Commit Transaction</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="grid-column-right">
+            
+            <div class="dashboard-card analytics-card">
+                <h3>Financial Distribution Mapping</h3>
+                <div class="chart-canvas-wrapper" style="width: 100%; height: 260px; min-height: 260px; position: relative; margin-top: 15px;">
+                    <canvas id="financialChart"></canvas>
+                </div>
+            </div>
+
+            <div class="dashboard-card ledger-card">
+                <h3>Recent Transactions Log</h3>
+                <div class="ledger-scroll-view">
+                    <ul id="transaction-list" class="ledger-list-wrapper">
+                        <p class="empty-msg">No transactions found. Start by adding some!</p>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

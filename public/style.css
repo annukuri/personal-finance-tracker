@@ -264,3 +264,138 @@ header {
         grid-column: 1;
     }
 }
+/* Core Reset Rules */
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body, html { height: 100%; width: 100%; overflow: hidden; background-color: #F9FAFB; }
+
+/* 3/4 and 1/4 Structural Columns Grid */
+.landing-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Left Slideshow Column (75% Width) */
+.slideshow-column {
+    position: relative;
+    width: 75%;
+    height: 100%;
+    background-color: #111827;
+    overflow: hidden;
+}
+
+.slide {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    opacity: 0;
+    transition: opacity 1.2s ease-in-out;
+    z-index: 1;
+}
+.slide.active { opacity: 1; z-index: 2; }
+.slide img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.55); }
+
+/* Text Content Overlay over Slideshow */
+.slide-overlay {
+    position: absolute;
+    bottom: 10%; left: 8%;
+    color: #FFFFFF;
+    z-index: 3;
+    max-width: 600px;
+}
+.slide-overlay h2 { font-size: 2.5rem; margin-bottom: 10px; text-shadow: 0 2px 4px rgba(0,0,0,0.4); }
+.slide-overlay p { font-size: 1.2rem; color: #E5E7EB; text-shadow: 0 1px 2px rgba(0,0,0,0.4); }
+
+/* Right Authentication Column (25% Width) */
+.auth-column {
+    width: 25%;
+    height: 100%;
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    border-left: 1px solid #E5E7EB;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.02);
+}
+.login-box { width: 100%; max-width: 320px; }
+.brand-header h1 { font-size: 1.8rem; color: #111827; margin-bottom: 6px; font-weight: 800; }
+.brand-header p { font-size: 0.85rem; color: #6B7280; margin-bottom: 25px; }
+
+/* Reusable Form Components */
+.input-group { margin-bottom: 16px; display: flex; flex-direction: column; }
+.input-group label { font-size: 0.8rem; font-weight: 600; color: #374151; margin-bottom: 6px; }
+.input-group input { padding: 10px 12px; border: 1px solid #D1D5DB; border-radius: 6px; font-size: 0.9rem; outline: none; transition: border-color 0.2s; }
+.input-group input:focus { border-color: #2563EB; }
+
+/* Buttons Custom Styles */
+.btn { display: block; width: 100%; padding: 11px; text-align: center; border-radius: 6px; font-size: 0.9rem; font-weight: 600; text-decoration: none; cursor: pointer; transition: all 0.2s; border: none; }
+.btn-primary { background-color: #2563EB; color: #FFFFFF; margin-top: 10px; }
+.btn-primary:hover { background-color: #1D4ED8; }
+.btn-secondary { background-color: #F3F4F6; color: #374151; border: 1px solid #D1D5DB; }
+.btn-secondary:hover { background-color: #E5E7EB; color: #111827; }
+
+.auth-divider { position: relative; text-align: center; margin: 24px 0 16px 0; }
+.auth-divider::before { content: ""; position: absolute; top: 50%; left: 0; width: 100%; height: 1px; background-color: #E5E7EB; z-index: 1; }
+.auth-divider span { position: relative; background-color: #FFFFFF; padding: 0 10px; font-size: 0.75rem; color: #9CA3AF; z-index: 2; }
+
+/* Standalone Registration Canvas Style */
+.register-page-bg { display: flex; align-items: center; justify-content: center; background-color: #F3F4F6; }
+.register-card-container { width: 100%; max-width: 420px; padding: 20px; }
+.register-card { background: #FFFFFF; padding: 40px; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); }
+.register-card h2 { margin-bottom: 8px; color: #111827; }
+.register-card p { font-size: 0.9rem; color: #6B7280; margin-bottom: 24px; line-height: 1.4; }
+.register-footer { text-align: center; margin-top: 20px; font-size: 0.85rem; color: #4B5563; }
+.register-footer a { color: #2563EB; text-decoration: none; font-weight: 600; }
+/* 🏢 Dashboard Layout Design Framework */
+.dashboard-page-bg { background-color: #F3F4F6; overflow-y: auto; height: 100%; width: 100%; }
+
+.dashboard-header {
+    background-color: #FFFFFF; padding: 15px 40px; display: flex; justify-content: space-between;
+    align-items: center; border-bottom: 1px solid #E5E7EB; box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.header-brand h2 { color: #111827; font-size: 1.4rem; font-weight: 800; }
+.header-brand span { color: #2563EB; font-weight: 400; font-size: 1.1rem; }
+.btn-logout { background-color: #FFFFFF; color: #4B5563; border: 1px solid #D1D5DB; padding: 8px 16px; font-size: 0.85rem; }
+.btn-logout:hover { background-color: #F9FAFB; color: #EF4444; border-color: #FCA5A5; }
+
+/* Dashboard Columns Layout */
+.dashboard-grid-container {
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 30px; max-width: 1400px; margin: 30px auto; padding: 0 20px;
+}
+.dashboard-card { background-color: #FFFFFF; padding: 25px; border-radius: 12px; border: 1px solid #E5E7EB; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.02); margin-bottom: 25px; }
+.dashboard-card h3 { font-size: 1.1rem; color: #111827; font-weight: 700; margin-bottom: 15px; }
+
+/* Financial Calculation Cards Row */
+.metrics-summary-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 25px; }
+.metric-card { padding: 20px; border-radius: 10px; color: #FFFFFF; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+.metric-card h5 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; opacity: 0.9; }
+.metric-card h2 { font-size: 1.75rem; font-weight: 800; }
+
+.card-income { background: linear-gradient(135deg, #10B981, #059669); }
+.card-expense { background: linear-gradient(135deg, #EF4444, #DC2626); }
+.card-balance { background: linear-gradient(135deg, #1F2937, #111827); }
+
+/* Form Component Tweaks */
+.input-row-split { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+.input-group select { padding: 10px 12px; border: 1px solid #D1D5DB; border-radius: 6px; font-size: 0.9rem; width: 100%; background-color: #FFFFFF; outline: none; }
+.btn-primary-action { background-color: #2563EB; color: #FFFFFF; font-weight: 700; padding: 12px; margin-top: 10px; }
+.btn-primary-action:hover { background-color: #1D4ED8; }
+
+/* Ledger Lists Stream UI */
+.ledger-scroll-view { max-height: 400px; overflow-y: auto; padding-right: 5px; }
+.ledger-list-wrapper { list-style: none; }
+.tx-item {
+    display: flex; justify-content: space-between; align-items: center; padding: 14px 18px;
+    background-color: #F9FAFB; border-radius: 8px; border-left: 5px solid #D1D5DB; margin-bottom: 10px;
+}
+.tx-item.Income { border-left-color: #10B981; }
+.tx-item.Expense { border-left-color: #EF4444; }
+.tx-header h5 { color: #111827; font-size: 0.95rem; font-weight: 600; margin-bottom: 2px; }
+.tx-header span { font-size: 0.75rem; color: #6B7280; }
+.tx-amount-actions { display: flex; align-items: center; gap: 15px; }
+.tx-amount { font-weight: 700; font-size: 1rem; }
+.tx-amount.Income { color: #059669; }
+.tx-amount.Expense { color: #DC2626; }
+.delete-tx-btn { background: none; border: none; color: #9CA3AF; font-size: 1.2rem; cursor: pointer; transition: color 0.2s; }
+.delete-tx-btn:hover { color: #EF4444; }
+.empty-msg { text-align: center; color: #6B7280; font-size: 0.9rem; padding: 40px 0; }
